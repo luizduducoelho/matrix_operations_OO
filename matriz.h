@@ -9,6 +9,7 @@ private:
 public:
 	int get_rows();
 	int get_cols();
+	Matriz(int linhas, int colunas, const double &valor = 0);
 
 };
 
