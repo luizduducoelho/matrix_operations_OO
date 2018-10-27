@@ -14,6 +14,23 @@ Matriz::Matriz(int linhas, int colunas, const double &valor){
 	}
 }
 
+Matriz::Matriz(const Matriz &m){
+	rows = m.rows;
+	cols = m.cols;
+	
+	data = new double*[rows];
+	for (int i = 0; i < rows; ++i){
+    	data[i] = new double[cols];
+    	for (int j=0; j < cols; j++){
+    		data[i][j] = m.data[i][j];
+    	}
+	}
+}	
+	
+	
+	
+}
+
 Matriz::~Matriz(void){
 	for (int i = 0; i < rows; ++i){
     	delete [] data[i];
