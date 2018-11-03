@@ -38,7 +38,7 @@ Matriz::~Matriz(void){
 }
 
 ostream& operator << (ostream& op, const Matriz& M){
-	op << "Linhas: " << M.rows << endl << "Colunas: " << M.cols << endl;
+	op << "Linhas:  " << M.rows << endl << "Colunas: " << M.cols << endl;
 	for(int i = 0; i < M.rows; i++){
 		for(int j = 0; j < M.cols; j++){
 			op << M.data[i][j] << "\t";
@@ -100,6 +100,30 @@ Matriz	Matriz::operator+(const Matriz& B){
     	}
 	}
 	return aux;
+}
+
+
+Matriz	Matriz::operator=(const Matriz& B){
+	
+	if(this == &B)
+		return *this;
+	
+	for (int i = 0; i < rows; ++i){
+    	delete [] data[i];
+	}
+    delete [] data;
+
+	rows = B.rows;
+	cols = B.cols;
+	
+	data = new double*[rows];
+	for (int i = 0; i < rows; ++i){
+    	data[i] = new double[cols];
+    	for (int j=0; j < cols; j++){
+    		data[i][j] = B.data[i][j];
+    	}
+	}
+	return *this;
 }
 
 Matriz	Matriz::operator-(const Matriz& B){	
@@ -199,4 +223,3 @@ Matriz&	Matriz::operator*=(double x){
 	}
 	return *this;
 }
-

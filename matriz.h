@@ -18,7 +18,9 @@ public:
 	void unit();
 	void zeros();
 	void ones();
-	Matriz operator+(const Matriz&);	
+	
+	Matriz operator+(const Matriz&);
+	Matriz operator=(const Matriz&);	
 	Matriz operator-(const Matriz&);
 	Matriz operator*(const Matriz&);	
 	Matriz& operator+=(const Matriz&);	
