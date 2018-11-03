@@ -1,6 +1,8 @@
 #ifndef MATRIZ_H
 #define MATRIZ_H
 
+#include <iostream>
+
 class Matriz{
 private:
 	int rows;
@@ -15,7 +17,15 @@ public:
 	int get_cols() const;
 	void unit();
 	void zeros();
-	void ones();	
+	void ones();
+	Matriz operator+(const Matriz&);	
+	Matriz operator-(const Matriz&);
+	Matriz operator*(const Matriz&);	
+	Matriz& operator+=(const Matriz&);	
+	Matriz& operator-=(const Matriz&);
+	Matriz& operator*=(const Matriz&);
+	Matriz& operator*=(const double);
+	friend std::ostream& operator<<(std::ostream&, const Matriz&);
 };
 
 #endif
