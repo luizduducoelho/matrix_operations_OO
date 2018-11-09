@@ -33,7 +33,7 @@ Matriz::~Matriz(void){
     	delete [] data[i];
 	}
     delete [] data;
-    //cout << "Destroid matrix" << endl;
+    //std::cout << "Matrix destruida" << std::endl;
 }
 
 std::ostream& operator << (std::ostream& op, const Matriz& M){
@@ -97,7 +97,7 @@ void Matriz::ones(){
 	}
 }
 
-Matriz	Matriz::operator+(const Matriz& B){
+Matriz	Matriz::operator+(const Matriz& B) const{
 	if(rows != B.rows || cols != B.cols){
 		throw std::invalid_argument("Erro! Dimensoes incompativeis!");
 	}
@@ -114,7 +114,6 @@ Matriz	Matriz::operator+(const Matriz& B){
 	}
 	return aux;
 }
-
 
 Matriz	Matriz::operator=(const Matriz& B){
 	if(this == &B)
@@ -138,7 +137,7 @@ Matriz	Matriz::operator=(const Matriz& B){
 	return *this;
 }
 
-Matriz	Matriz::operator-(const Matriz& B){	
+Matriz	Matriz::operator-(const Matriz& B) const{	
 	if(rows != B.rows || cols != B.cols){
 		throw std::invalid_argument("Erro! Dimensoes incompativeis!");
 	}
@@ -156,7 +155,7 @@ Matriz	Matriz::operator-(const Matriz& B){
 	return aux;
 }
 
-Matriz	Matriz::operator*(const Matriz& B){	
+Matriz	Matriz::operator*(const Matriz& B) const{	
 	if(cols != B.rows){
 		throw std::invalid_argument("Erro! Dimensoes incompativeis!");
 	}
@@ -218,7 +217,7 @@ Matriz&	Matriz::operator*=(double x){
 	return *this;
 }
 
-bool Matriz::operator==(const Matriz& B){
+bool Matriz::operator==(const Matriz& B) const{
 	if(rows != B.rows || cols != B.cols)
 		return false;
 		
@@ -231,7 +230,7 @@ bool Matriz::operator==(const Matriz& B){
 	return true;		
 }
 
-bool Matriz::operator!=(const Matriz& B){
+bool Matriz::operator!=(const Matriz& B) const{
 	if(rows != B.rows || cols != B.cols)
 		return true;
 		
@@ -244,15 +243,7 @@ bool Matriz::operator!=(const Matriz& B){
 	return false;		
 }
 
-double&	Matriz::operator()(const int i, const int j){	
-	return	data[i - 1][j - 1];
-}
-
-void Matriz::operator=(const double x){
-	(*this) = x;
-}
-
-Matriz	Matriz::operator~(){
+Matriz	Matriz::operator~() const{
 	Matriz A(cols, rows);
 	
 	for(int i = 0; i < cols; i++){

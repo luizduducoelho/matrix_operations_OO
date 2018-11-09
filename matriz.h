@@ -22,22 +22,22 @@ public:
 	void zeros();
 	void ones();
 	
-	Matriz operator+(const Matriz&);
-	Matriz operator=(const Matriz&);	
-	Matriz operator-(const Matriz&);
-	Matriz operator*(const Matriz&);
-	Matriz operator~();	
+	Matriz operator=(const Matriz&);
+	Matriz operator+(const Matriz&) const;	
+	Matriz operator-(const Matriz&)  const;
+	Matriz operator*(const Matriz&)  const;
+	Matriz operator~() const;	
 	Matriz& operator+=(const Matriz&);	
 	Matriz& operator-=(const Matriz&);
 	Matriz& operator*=(const Matriz&);
 	Matriz& operator*=(const double);
 	
-	double& operator()(const int, const int);
+	double& operator()(const int i, const int j) const {return	data[i - 1][j - 1];}
 	
-	void operator=(const double);
+	void operator=(const double x){(*this) = x;}
 	
-	bool operator==(const Matriz&);
-	bool operator!=(const Matriz&);
+	bool operator==(const Matriz&) const;
+	bool operator!=(const Matriz&) const;
 	
 	friend std::ostream& operator<<(std::ostream&, const Matriz&);
 	friend std::istream& operator>>(std::istream&, Matriz&);
