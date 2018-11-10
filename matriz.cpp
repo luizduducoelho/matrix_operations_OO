@@ -3,6 +3,10 @@
 #include <stdexcept>
 
 Matriz::Matriz(int linhas, int colunas, const double &valor){
+	if(linhas < 0 || colunas < 0){
+		throw std::invalid_argument("Erro. O numero de linhas e colunas devem ser numeros naturais");
+	}
+	
 	rows = linhas;
 	cols = colunas;
 	
@@ -13,6 +17,7 @@ Matriz::Matriz(int linhas, int colunas, const double &valor){
     		data[i][j] = valor;
     	}
 	}
+	std::cout << "Matrix criada: construtor padrao." << std::endl;
 }
 
 Matriz::Matriz(const Matriz &m){
@@ -26,6 +31,7 @@ Matriz::Matriz(const Matriz &m){
     		data[i][j] = m.data[i][j];
     	}
 	}
+	std::cout << "Matrix criada: construtor de copia." << std::endl;
 }		
 
 Matriz::~Matriz(void){
@@ -33,7 +39,7 @@ Matriz::~Matriz(void){
     	delete [] data[i];
 	}
     delete [] data;
-    //std::cout << "Matrix destruida" << std::endl;
+    std::cout << "Matrix destruida: destrutor" << std::endl;
 }
 
 std::ostream& operator << (std::ostream& op, const Matriz& M){
@@ -52,6 +58,10 @@ std::istream& operator >> (std::istream& op, Matriz& M){
 	op >> M.rows;
 	std::cout << "Insira #colunas: ";
 	op >> M.cols;
+	
+	if(M.rows < 0 || M.cols < 0){
+		throw std::invalid_argument("Erro. O numero de linhas e colunas devem ser numeros naturais");
+	}	
 
 	for (int i = 0; i < M.rows; ++i){
     	delete [] M.data[i];
@@ -71,6 +81,10 @@ std::istream& operator >> (std::istream& op, Matriz& M){
 }
 
 void Matriz::unit(){
+	if(rows != cols){
+		throw std::invalid_argument("Erro. A matrix deve ser quadrada.");
+	}	
+
 	for (int i = 0; i < rows; ++i){
     	for (int j = 0; j < cols; j++){
     		if(i == j)
@@ -115,7 +129,7 @@ Matriz	Matriz::operator+(const Matriz& B) const{
 	return aux;
 }
 
-Matriz	Matriz::operator=(const Matriz& B){
+Matriz&	Matriz::operator=(const Matriz& B){
 	if(this == &B)
 		return *this;
 	
@@ -253,3 +267,11 @@ Matriz	Matriz::operator~() const{
 	}
 	return A;
 }
+
+double& Matriz::operator()(int i, int j){
+	if(i <= 0 || i > rows || j <= 0 || j > cols){
+		throw std::invalid_argument("Erro! Nao existe elemento para este indice!");
+	}	
+	return data[i - 1][j - 1];	
+}
+	

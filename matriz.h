@@ -10,11 +10,9 @@ private:
 	double** data;
 	
 public:
-	Matriz(int linhas=0, int colunas=0, const double &valor = 0); 
-	~Matriz(); 				  // destrutor	
-	Matriz(const Matriz &m);  // construtor de copia
-	
-	double get(const int i, const int j) const {return data[i - 1][j - 1];}
+	Matriz(int linhas = 0, int colunas = 0, const double &valor = 0); 
+	~Matriz(); 				  
+	Matriz(const Matriz &m);  
 	
 	int get_rows() const {return rows;}
 	int get_cols() const {return cols;}
@@ -22,7 +20,7 @@ public:
 	void zeros();
 	void ones();
 	
-	Matriz operator=(const Matriz&);
+	Matriz& operator=(const Matriz&);
 	Matriz operator+(const Matriz&) const;	
 	Matriz operator-(const Matriz&)  const;
 	Matriz operator*(const Matriz&)  const;
@@ -30,11 +28,10 @@ public:
 	Matriz& operator+=(const Matriz&);	
 	Matriz& operator-=(const Matriz&);
 	Matriz& operator*=(const Matriz&);
-	Matriz& operator*=(const double);
+	Matriz& operator*=(double);
 	
-	double& operator()(const int i, const int j) const {return	data[i - 1][j - 1];}
-	
-	void operator=(const double x){(*this) = x;}
+	double& operator()(int i, int j);
+	double& operator=(double x){return (*this) = x;}
 	
 	bool operator==(const Matriz&) const;
 	bool operator!=(const Matriz&) const;
