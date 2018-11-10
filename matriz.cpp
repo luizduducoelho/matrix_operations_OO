@@ -54,7 +54,12 @@ std::ostream& operator << (std::ostream& op, const Matriz& M){
 }
 
 std::istream& operator >> (std::istream& op, Matriz& M){
-	std::cout << "Insira #linhas: ";
+	for (int i = 0; i < M.rows; ++i){
+    	delete [] M.data[i];
+	}
+    delete [] M.data;
+
+	std::cout << "Insira #linhas: ";	
 	op >> M.rows;
 	std::cout << "Insira #colunas: ";
 	op >> M.cols;
@@ -62,11 +67,6 @@ std::istream& operator >> (std::istream& op, Matriz& M){
 	if(M.rows < 0 || M.cols < 0){
 		throw std::invalid_argument("Erro. O numero de linhas e colunas devem ser numeros naturais");
 	}	
-
-	for (int i = 0; i < M.rows; ++i){
-    	delete [] M.data[i];
-	}
-    delete [] M.data;
 	
 	M.data = new double*[M.rows];
 	std::cout << "Insira os valores da Matriz: ";
